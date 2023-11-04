@@ -1,0 +1,578 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VSlices.Core.Abstracts</name>
+    </assembly>
+    <members>
+        <member name="T:VSlices.Core.Abstracts.Configurations.MoveActions">
+            <summary>
+            Represents what to do in the background event listener when a problem occurs in the event <see cref="T:VSlices.Core.Abstracts.Handlers.IHandler`1"/>.
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Configurations.MoveActions.MoveLast">
+            <summary>
+            Move to the last position in the queue
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Configurations.MoveActions.InmediateRetry">
+            <summary>
+            Inmediate retry the event <see cref="T:VSlices.Core.Abstracts.Handlers.IHandler`1"/>
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Configurations.BackgroundEventListenerConfiguration">
+            <summary>
+            Represents the configuration for the background event listener
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Configurations.BackgroundEventListenerConfiguration.ActionInException">
+            <summary>
+            Represents what to do then a exception occurs in the event <see cref="T:VSlices.Core.Abstracts.Handlers.IHandler`1"/>.
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Configurations.BackgroundEventListenerConfiguration.MaxRetries">
+            <summary>
+            Represents the maximum number of retries for the event <see cref="T:VSlices.Core.Abstracts.Handlers.IHandler`1"/>.
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Events.BackgroundEventListenerService">
+            <summary>
+            Listens to a event queue and publishes the event to a event pipeline
+            </summary>
+            <remarks>
+            A scope is created for each event to be published
+            </remarks>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Events.BackgroundEventListenerService.#ctor(Microsoft.Extensions.Logging.ILogger{VSlices.Core.Abstracts.Events.BackgroundEventListenerService},System.IServiceProvider,VSlices.Core.Abstracts.Configurations.BackgroundEventListenerConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:VSlices.Core.Abstracts.Events.BackgroundEventListenerService"/> class.
+            </summary>
+            <param name="logger">Logger</param>
+            <param name="serviceProvider">Service provider</param>
+            <param name="config">Configuration</param>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Events.BackgroundEventListenerService.ExecuteAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Events.IEventQueueWriter">
+            <summary>
+            Represents a queue writer of events
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Events.IEventQueueWriter.EnqueueAsync(VSlices.Core.Abstracts.Requests.IEvent,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously enqueue a event to the queue
+            </summary>
+            <param name="event"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Events.IEventQueueReader">
+            <summary>
+            Represents a queue reader of events
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Events.IEventQueueReader.DequeueAsync(System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously dequeue the next event from the queue
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns>the dequeued event from the queue</returns>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Events.IEventQueue">
+            <summary>
+            Represents a queue of events, with write and read capabilities
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Events.IPublisher">
+            <summary>
+            Publishes a event through a event pipeline to be handled by many handlers
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Events.IPublisher.PublishAsync(VSlices.Core.Abstracts.Requests.IEvent,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously publishes a event to a event pipeline
+            </summary>
+            <param name="event">Event</param>
+            <param name="cancellationToken">CancellationToken</param> 
+            <returns><see cref="T:System.Threading.Tasks.ValueTask"/> representing the action</returns>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Handlers.IHandler`2">
+            <summary>
+            Defines a handler for a <see cref="T:VSlices.Core.Abstracts.Requests.IBaseRequest`1"/>
+            </summary>
+            <remarks>If idempotency is necessary, the handler it self must ensure it</remarks>
+            <typeparam name="TRequest">The request to be handled</typeparam>
+            <typeparam name="TResponse">The expected response of the handler</typeparam>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Handlers.IHandler`2.HandleAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Handles the request
+            </summary>
+            <param name="request">The request to be handled</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.Response`1"/> of <see cref="T:VSlices.Core.Abstracts.Responses.Success"/> that represents the result of the operation </returns>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Handlers.IHandler`1">
+            <summary>
+            Defines a handler for a <see cref="T:VSlices.Core.Abstracts.Requests.IRequest"/>
+            </summary>
+            <typeparam name="TRequest">The request to be handled</typeparam>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Handlers.RequestHandlerDelegate`1">
+            <summary>
+            A delegate that represents the next action in the pipeline
+            </summary>
+            <typeparam name="TResponse">The response of the next action</typeparam>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.Response`1"/> of <see cref="T:VSlices.Core.Abstracts.Responses.Success"/> that represents the result of the next action </returns>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Handlers.IPipelineBehavior`2">
+            <summary>
+            A middleware behavior for a <see cref="T:VSlices.Core.Abstracts.Requests.IBaseRequest`1"/>
+            </summary>
+            <typeparam name="TRequest">The request to intercept</typeparam>
+            <typeparam name="TResponse">The expected response</typeparam>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Handlers.IPipelineBehavior`2.HandleAsync(`0,VSlices.Core.Abstracts.Handlers.RequestHandlerDelegate{`1},System.Threading.CancellationToken)">
+            <summary>
+            A method that intercepts the pipeline
+            </summary>
+            <param name="request">The intercepted request</param>
+            <param name="next">The next action</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.Response`1"/> of <see cref="T:VSlices.Core.Abstracts.Responses.Success"/> that represents the result of the operation </returns>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Presentation.IFeatureDependencyDefinition">
+            <summary>
+            Specifies dependencies in a given use case
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Presentation.IFeatureDependencyDefinition.DefineDependencies(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Defines the dependencies for the use case
+            </summary>
+            <param name="services">Service collection</param>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Requests.IBaseRequest`1">
+            <summary>
+            Represents the start point of any business logic
+            </summary>
+            <typeparam name="TResponse"></typeparam>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Requests.IRequest`1">
+            <summary>
+            Represents the start point of a use case, with a specific response type
+            </summary>
+            <typeparam name="TResponse">The expected response of this request</typeparam>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Requests.IRequest">
+            <summary>
+            Represents the start point of a use case, with a success response
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Requests.ICommand`1">
+            <summary>
+            Represents the start point of a use case that mutates state, with a specific response type
+            </summary>
+            <typeparam name="TResponse">The expected response of this request</typeparam>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Requests.ICommand">
+            <summary>
+            Represents the start point of a use case that mutates state, with a success response
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Requests.IQuery`1">
+            <summary>
+            Represents the start point of a use case that queries data, with a specific response type
+            </summary>
+            <typeparam name="TResponse">The expected response of this request</typeparam>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Requests.IEvent">
+            <summary>
+            Represents the start point of a side effect of a use case
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Requests.IEvent.Id">
+            <summary>
+            The unique identifier of this event
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Requests.EventBase">
+            <summary>
+            Abstract base class for all events
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Requests.EventBase.Id">
+            <inheritdoc />
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Responses.FailureKind">
+            <summary>
+            Specifies different reasons for a business failure
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.FailureKind.NotAuthenticatedUser">
+            <summary>
+            Error used with authentication errors
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.FailureKind.NotAllowedUser">
+            <summary>
+            Error used with authorization errors
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.FailureKind.NotFoundResource">
+            <summary>
+            Error used when a resource is not found
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.FailureKind.ConcurrencyError">
+            <summary>
+            Error used when a concurrency error occurs
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.FailureKind.ContractValidation">
+            <summary>
+            Error used when a contract validation fails
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.FailureKind.DomainValidation">
+            <summary>
+            Error used when a domain validation fails
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.FailureKind.Unspecified">
+            <summary>
+            Error used when a not specified error occurs
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.FailureKind.UnhandledException">
+            <summary>
+            Error used when an unhandled exception occurs
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Responses.ValidationError">
+            <summary>
+            Represents a validation error
+            </summary>
+            <param name="Name">
+            Name of the property that failed validation
+            </param>
+            <param name="Detail">
+            A human-readable explanation specific to this occurrence of the error
+            </param>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.ValidationError.#ctor(System.String,System.String)">
+            <summary>
+            Represents a validation error
+            </summary>
+            <param name="Name">
+            Name of the property that failed validation
+            </param>
+            <param name="Detail">
+            A human-readable explanation specific to this occurrence of the error
+            </param>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.ValidationError.Name">
+            <summary>
+            Name of the property that failed validation
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.ValidationError.Detail">
+            <summary>
+            A human-readable explanation specific to this occurrence of the error
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Responses.BusinessFailure">
+            <summary>
+            Represents a failure in the given business logic. Based on <see href="https://datatracker.ietf.org/doc/html/rfc9457"/>
+            </summary>
+            <param name="Kind">
+            Failure kind. See <see cref="T:VSlices.Core.Abstracts.Responses.FailureKind"/> for more information
+            </param>
+            <param name="Title">
+            A short, human-readable summary of the problem type
+            </param>
+            <param name="Detail">
+            A human-readable explanation specific to this occurrence of the problem
+            </param>
+            <param name="Errors">
+            A list of validation errors, if any
+            </param>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.#ctor(VSlices.Core.Abstracts.Responses.FailureKind,System.String,System.String,VSlices.Core.Abstracts.Responses.ValidationError[])">
+            <summary>
+            Represents a failure in the given business logic. Based on <see href="https://datatracker.ietf.org/doc/html/rfc9457"/>
+            </summary>
+            <param name="Kind">
+            Failure kind. See <see cref="T:VSlices.Core.Abstracts.Responses.FailureKind"/> for more information
+            </param>
+            <param name="Title">
+            A short, human-readable summary of the problem type
+            </param>
+            <param name="Detail">
+            A human-readable explanation specific to this occurrence of the problem
+            </param>
+            <param name="Errors">
+            A list of validation errors, if any
+            </param>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.BusinessFailure.Kind">
+            <summary>
+            Failure kind. See <see cref="T:VSlices.Core.Abstracts.Responses.FailureKind"/> for more information
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.BusinessFailure.Title">
+            <summary>
+            A short, human-readable summary of the problem type
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.BusinessFailure.Detail">
+            <summary>
+            A human-readable explanation specific to this occurrence of the problem
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.BusinessFailure.Errors">
+            <summary>
+            A list of validation errors, if any
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Responses.BusinessFailure.Of">
+            <summary>
+            Shortcut to create a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with specified <see cref="T:VSlices.Core.Abstracts.Responses.FailureKind"/> 
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.UserNotAuthenticated(System.String,System.String)">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.NotAuthenticatedUser"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.NotAuthenticatedUser"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.UserNotAllowed(System.String,System.String)">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.NotAllowedUser"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.NotAllowedUser"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.NotFoundResource(System.String,System.String)">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.NotFoundResource"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.NotFoundResource"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.ConcurrencyError(System.String,System.String)">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.ConcurrencyError"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.ConcurrencyError"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.ContractValidation(System.String,System.String,VSlices.Core.Abstracts.Responses.ValidationError[])">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.ContractValidation"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <param name="errors">Related validation errors</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.ContractValidation"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.ContractValidation(System.String,System.String,System.Nullable{VSlices.Core.Abstracts.Responses.ValidationError})">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.ContractValidation"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <param name="error">Related validation error</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.ContractValidation"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.DomainValidation(System.String,System.String,VSlices.Core.Abstracts.Responses.ValidationError[])">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.DomainValidation"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <param name="errors">Related validation errors</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.DomainValidation"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.DomainValidation(System.String,System.String,System.Nullable{VSlices.Core.Abstracts.Responses.ValidationError})">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.DomainValidation"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <param name="error">Related validation error</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.DomainValidation"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.Unspecified(System.String,System.String)">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.Unspecified"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.Unspecified"/>, and the specified title and detail</returns>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.BusinessFailure.Of.UnhandledException(System.String,System.String)">
+            <summary>
+            Creates a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.UnhandledException"/>
+            </summary>
+            <param name="title">Title of the problem</param>
+            <param name="detail">Detail of the problem</param>
+            <returns>A <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/> with <see cref="F:VSlices.Core.Abstracts.Responses.FailureKind.UnhandledException"/>, and the specified title and detail</returns>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Responses.Response`1">
+            <summary>
+            Represents a response from a process.
+            </summary>
+            <typeparam name="TResponse">The expected response in success case</typeparam>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.Response`1.IsSuccess">
+            <summary>
+            Indicates if process was successful
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.Response`1.IsFailure">
+            <summary>
+            Indicates if process failed
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.Response`1.SuccessValue">
+            <summary>
+            The success response of the process, throws <see cref="T:System.InvalidOperationException"/> if accessed on failure
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.Response`1.BusinessFailure">
+            <summary>
+            The failure response of the process, throws <see cref="T:System.InvalidOperationException"/> if accessed on success
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.Response`1.#ctor(`0)">
+            <summary>
+            Creates a new instance of <see cref="T:VSlices.Core.Abstracts.Responses.Response`1"/> with a success value
+            </summary>
+            <param name="successValue">The success value of the process</param>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Responses.Response`1.#ctor(VSlices.Core.Abstracts.Responses.BusinessFailure)">
+            <summary>
+            Creates a new instance of <see cref="T:VSlices.Core.Abstracts.Responses.Response`1"/> with a failure value
+            </summary>
+            <param name="businessFailure">A struct with the failure detail</param>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Responses.ResponseDefaults">
+            <summary>
+            Shorthands to create <see cref="T:VSlices.Core.Abstracts.Responses.Response`1"/> instances with some common values
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.ResponseDefaults.Success">
+            <summary>
+            Default success response
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.ResponseDefaults.TaskSuccess">
+            <summary>
+            Default failure response, in a <see cref="T:System.Threading.Tasks.ValueTask"/>
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Responses.Success">
+            <summary>
+            A simple and light-weight struct to indicate success in a operation
+            </summary>
+        </member>
+        <member name="F:VSlices.Core.Abstracts.Responses.Success.Value">
+            <summary>
+            A static instance of <see cref="T:VSlices.Core.Abstracts.Responses.Success"/>
+            </summary>
+        </member>
+        <member name="P:VSlices.Core.Abstracts.Responses.Success.TaskValue">
+            <summary>
+            A static instance of <see cref="T:System.Threading.Tasks.ValueTask"/> of <see cref="T:VSlices.Core.Abstracts.Responses.Success"/>
+            </summary>
+        </member>
+        <member name="T:VSlices.Core.Abstracts.Sender.ISender">
+            <summary>
+            Sends a request to be handled by a single handler
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.Abstracts.Sender.ISender.SendAsync``1(VSlices.Core.Abstracts.Requests.IRequest{``0},System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously sends a request to a handler
+            </summary>
+            <typeparam name="TResponse">Expected response type</typeparam>
+            <param name="request">Request to be handled</param>
+            <param name="cancellationToken">Cancellation Token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.Response`1"/> of <see cref="T:VSlices.Core.Abstracts.Responses.Success"/> that represents the result of the operation </returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddSender``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Adds a <see cref="T:VSlices.Core.Abstracts.Sender.ISender"/> implementation to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <typeparam name="T">Implementation of the <see cref="T:VSlices.Core.Abstracts.Sender.ISender"/></typeparam>
+            <param name="services">Service collection</param>
+            <param name="lifetime">The lifetime of the <see cref="T:VSlices.Core.Abstracts.Sender.ISender"/> implemented</param>
+            <returns>Service collection</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddPublisher``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Adds a <see cref="T:VSlices.Core.Abstracts.Events.IPublisher"/> implementation to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <typeparam name="T">Implementation of the <see cref="T:VSlices.Core.Abstracts.Events.IPublisher"/></typeparam>
+            <param name="services">Service collection</param>
+            <param name="lifetime">The lifetime of the <see cref="T:VSlices.Core.Abstracts.Events.IPublisher"/> implemented</param>
+            <returns>Service collection</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddEventQueue``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Adds a <see cref="T:VSlices.Core.Abstracts.Events.IEventQueue"/> implementation to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <remarks>
+            It also add it as <see cref="T:VSlices.Core.Abstracts.Events.IEventQueueWriter"/> and <see cref="T:VSlices.Core.Abstracts.Events.IEventQueueReader"/> implementation
+            </remarks>
+            <typeparam name="T">Implementation of the <see cref="T:VSlices.Core.Abstracts.Events.IEventQueue"/></typeparam>
+            <param name="services">Service collection</param>
+            <param name="lifetime">The lifetime of the <see cref="T:VSlices.Core.Abstracts.Events.IEventQueue"/> implemented</param>
+            <returns>Service collection</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddPipelineBehavior(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Adds a open <see cref="T:VSlices.Core.Abstracts.Handlers.IPipelineBehavior`2"/> to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+            <param name="services">Service collection</param>
+            <param name="type">The implementation type of the open behavior</param>
+            <param name="lifetime">The lifetime of the <see cref="T:VSlices.Core.Abstracts.Sender.ISender"/> implemented</param>
+            <returns>Service collection</returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddFeatureDependenciesFromAssemblyContaining``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Adds the dependencies defined in the <see cref="T:VSlices.Core.Abstracts.Presentation.IFeatureDependencyDefinition"/> implementations
+            </summary>
+            <typeparam name="TAnchor"></typeparam>
+            <param name="services">Service collection</param>
+            <returns>Service collection</returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddHandlersFromAssemblyContaining``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
+            <summary>
+            Adds <see cref="T:VSlices.Core.Abstracts.Handlers.IHandler`2"/> implementations from the specified assembly of the <typeparamref name="TAnchor"/> type, to the service collection.
+            </summary>
+            <typeparam name="TAnchor">Anchor type to search</typeparam>
+            <param name="services">Service collection</param>
+            <param name="lifetime">Lifetime</param>
+            <returns>Service collection</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddBackgroundEventListenerService(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{VSlices.Core.Abstracts.Configurations.BackgroundEventListenerConfiguration})">
+            <summary>
+            Adds a hosted service that will listen for events in the background
+            </summary>
+            <param name="services">Service Collection</param>
+            <param name="configAct">Action to configure the service</param>
+            <returns>Service Collection</returns>
+        </member>
+    </members>
+</doc>

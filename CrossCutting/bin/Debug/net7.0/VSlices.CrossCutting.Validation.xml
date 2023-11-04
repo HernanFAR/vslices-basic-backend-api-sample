@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VSlices.CrossCutting.Validation</name>
+    </assembly>
+    <members>
+        <member name="T:VSlices.CrossCutting.Validation.AbstractValidationBehavior`2">
+            <summary>
+            Base class for validation behaviors
+            </summary>
+            <typeparam name="TRequest">The intercepted request to validate</typeparam>
+            <typeparam name="TResponse">The expected successful response</typeparam>
+        </member>
+        <member name="M:VSlices.CrossCutting.Validation.AbstractValidationBehavior`2.HandleAsync(`0,VSlices.Core.Abstracts.Handlers.RequestHandlerDelegate{`1},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:VSlices.CrossCutting.Validation.AbstractValidationBehavior`2.ValidateAsync(`0,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously validates the request
+            </summary>
+            <param name="request">The request to validate</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.Response`1"/> of <see cref="T:VSlices.Core.Abstracts.Responses.Success"/> that represents the result of the operation </returns>
+        </member>
+    </members>
+</doc>

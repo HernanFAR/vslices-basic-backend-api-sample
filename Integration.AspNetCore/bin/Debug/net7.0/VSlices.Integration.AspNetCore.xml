@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VSlices.Integration.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.AspNetCore.Builder.VSlicesIntegrationAspNetCoreERBExtensions.UseEndpointDefinitions(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)">
+            <summary>
+            Uses the endpoint definitions to define the endpoints of the application.
+            </summary>
+            <param name="app">Endpoint route builder</param>
+        </member>
+    </members>
+</doc>

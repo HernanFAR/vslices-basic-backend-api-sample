@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+    <PackageReference Include="VSlices.Core.DataAccess.EntityFramework" Version="6.0.0-pre.2" />
+    <PackageReference Include="VSlices.Core.Events.EventQueue.InMemory" Version="6.0.0-pre.2" />
+    <PackageReference Include="VSlices.Core.Events.Publisher.Reflection" Version="6.0.0-pre.2" />
+    <PackageReference Include="VSlices.Core.Handlers.FluentValidation" Version="6.0.0-pre.2" />
+    <PackageReference Include="VSlices.Core.Presentation.AspNetCore" Version="6.0.0-pre.2" />
+    <PackageReference Include="VSlices.Core.Sender.Reflection" Version="6.0.0-pre.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CrossCutting\CrossCutting.csproj" />
+  </ItemGroup>
+
+</Project>

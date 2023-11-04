@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VSlices.Core.DataAccess.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="T:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`2">
+            <summary>
+            Defines a repository that can create <typeparamref name="TEntity"/> entities using EntityFramework Core
+            </summary>
+            <typeparam name="TDbContext">The <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> related to the use case</typeparam>
+            <typeparam name="TEntity">The entity to be created</typeparam>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`2.#ctor(`0,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new instance with a given <typeparamref name="TDbContext"/> and <see cref="T:Microsoft.Extensions.Logging.ILogger"/>
+            </summary>
+            <param name="context">EF Core Context of the use case</param>
+            <param name="logger">Logger in case of errors</param>
+        </member>
+        <member name="P:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`2.ConcurrencyMessageTemplate">
+            <summary>
+            Message template for concurrency errors
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`2.ProcessConcurrencyExceptionAsync(Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException,System.Threading.CancellationToken)">
+            <summary>
+            Processes a <see cref="T:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException"/> and returns a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/>, usually with a concurrency error
+            </summary>
+            <param name="ex">The concurrency error</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`2.CreateAsync(`1,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`3">
+            <summary>
+            Defines a repository that can create <typeparamref name="TDbContext"/> with <typeparamref name="TEntity"/> input, using EntityFramework Core, useful to use DDD with database-first scenarios
+            </summary>
+            <typeparam name="TDbContext">The <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> related to the use case</typeparam>
+            <typeparam name="TEntity">The entity to input</typeparam>
+            <typeparam name="TDbEntity">The entity to be created</typeparam>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`3.#ctor(`0,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new instance with a given <typeparamref name="TDbContext"/> and <see cref="T:Microsoft.Extensions.Logging.ILogger"/>
+            </summary>
+            <param name="context">EF Core Context of the use case</param>
+            <param name="logger">Logger in case of errors</param>
+        </member>
+        <member name="P:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`3.ConcurrencyMessageTemplate">
+            <summary>
+            Message template for concurrency errors
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`3.ToDatabaseEntity(`1)">
+            <summary>
+            Converts a <typeparamref name="TEntity"/> to a <typeparamref name="TDbEntity"/>
+            </summary>
+            <param name="entity">The database entity to convert</param>
+            <returns>A <typeparamref name="TDbEntity"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`3.ToEntity(`2)">
+            <summary>
+            Converts a <typeparamref name="TDbEntity"/> to a <typeparamref name="TEntity"/>
+            </summary>
+            <param name="entity">The entity to convert</param>
+            <returns>A <typeparamref name="TEntity"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`3.ProcessConcurrencyExceptionAsync(Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException,System.Threading.CancellationToken)">
+            <summary>
+            Processes a <see cref="T:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException"/> and returns a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/>, usually with a concurrency error
+            </summary>
+            <param name="ex">The concurrency error</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFCreateRepository`3.CreateAsync(`1,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`2">
+            <summary>
+            Defines a repository that can remove <typeparamref name="TEntity"/> entities using EntityFramework Core
+            </summary>
+            <typeparam name="TDbContext">The <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> related to the use case</typeparam>
+            <typeparam name="TEntity">The entity to be removed</typeparam>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`2.#ctor(`0,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new instance with a given <typeparamref name="TDbContext"/> and <see cref="T:Microsoft.Extensions.Logging.ILogger"/>
+            </summary>
+            <param name="context">EF Core Context of the use case</param>
+            <param name="logger">Logger in case of errors</param>
+        </member>
+        <member name="P:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`2.ConcurrencyMessageTemplate">
+            <summary>
+            Message template for concurrency errors
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`2.ProcessConcurrencyExceptionAsync(Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException,System.Threading.CancellationToken)">
+            <summary>
+            Processes a <see cref="T:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException"/> and returns a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/>, usually with a concurrency error
+            </summary>
+            <param name="ex">The concurrency error</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`2.RemoveAsync(`1,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`3">
+            <summary>
+            Defines a repository that can remove <typeparamref name="TDbContext"/> with <typeparamref name="TEntity"/> input, using EntityFramework Core, useful to use DDD with database-first scenarios
+            </summary>
+            <typeparam name="TDbContext">The <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> related to the use case</typeparam>
+            <typeparam name="TEntity">The entity to input</typeparam>
+            <typeparam name="TDbEntity">The entity to be removed</typeparam>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`3.#ctor(`0,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new instance with a given <typeparamref name="TDbContext"/> and <see cref="T:Microsoft.Extensions.Logging.ILogger"/>
+            </summary>
+            <param name="context">EF Core Context of the use case</param>
+            <param name="logger">Logger in case of errors</param>
+        </member>
+        <member name="P:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`3.ConcurrencyMessageTemplate">
+            <summary>
+            Message template for concurrency errors
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`3.ToDatabaseEntity(`1)">
+            <summary>
+            Converts a <typeparamref name="TEntity"/> to a <typeparamref name="TDbEntity"/>
+            </summary>
+            <param name="entity">The database entity to convert</param>
+            <returns>A <typeparamref name="TDbEntity"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`3.ToEntity(`2)">
+            <summary>
+            Converts a <typeparamref name="TDbEntity"/> to a <typeparamref name="TEntity"/>
+            </summary>
+            <param name="entity">The entity to convert</param>
+            <returns>A <typeparamref name="TEntity"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`3.ProcessConcurrencyExceptionAsync(Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException,System.Threading.CancellationToken)">
+            <summary>
+            Processes a <see cref="T:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException"/> and returns a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/>, usually with a concurrency error
+            </summary>
+            <param name="ex">The concurrency error</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFRemoveRepository`3.RemoveAsync(`1,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`2">
+            <summary>
+            Defines a repository that can update <typeparamref name="TEntity"/> entities using EntityFramework Core
+            </summary>
+            <typeparam name="TDbContext">The <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> related to the use case</typeparam>
+            <typeparam name="TEntity">The entity to be removed</typeparam>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`2.#ctor(`0,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new instance with a given <typeparamref name="TDbContext"/> and <see cref="T:Microsoft.Extensions.Logging.ILogger"/>
+            </summary>
+            <param name="context">EF Core Context of the use case</param>
+            <param name="logger">Logger in case of errors</param>
+        </member>
+        <member name="P:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`2.ConcurrencyMessageTemplate">
+            <summary>
+            Message template for concurrency errors
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`2.ProcessConcurrencyExceptionAsync(Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException,System.Threading.CancellationToken)">
+            <summary>
+            Processes a <see cref="T:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException"/> and returns a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/>, usually with a concurrency error
+            </summary>
+            <param name="ex">The concurrency error</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`2.UpdateAsync(`1,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`3">
+            <summary>
+            Defines a repository that can update <typeparamref name="TDbContext"/> with <typeparamref name="TEntity"/> input, using EntityFramework Core, useful to use DDD with database-first scenarios
+            </summary>
+            <typeparam name="TDbContext">The <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> related to the use case</typeparam>
+            <typeparam name="TEntity">The entity to input</typeparam>
+            <typeparam name="TDbEntity">The entity to be updated</typeparam>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`3.#ctor(`0,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new instance with a given <typeparamref name="TDbContext"/> and <see cref="T:Microsoft.Extensions.Logging.ILogger"/>
+            </summary>
+            <param name="context">EF Core Context of the use case</param>
+            <param name="logger">Logger in case of errors</param>
+        </member>
+        <member name="P:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`3.ConcurrencyMessageTemplate">
+            <summary>
+            Message template for concurrency errors
+            </summary>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`3.ToDatabaseEntity(`1)">
+            <summary>
+            Converts a <typeparamref name="TEntity"/> to a <typeparamref name="TDbEntity"/>
+            </summary>
+            <param name="entity">The database entity to convert</param>
+            <returns>A <typeparamref name="TDbEntity"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`3.ToEntity(`2)">
+            <summary>
+            Converts a <typeparamref name="TDbEntity"/> to a <typeparamref name="TEntity"/>
+            </summary>
+            <param name="entity">The entity to convert</param>
+            <returns>A <typeparamref name="TEntity"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`3.ProcessConcurrencyExceptionAsync(Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException,System.Threading.CancellationToken)">
+            <summary>
+            Processes a <see cref="T:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException"/> and returns a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/>, usually with a concurrency error
+            </summary>
+            <param name="ex">The concurrency error</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1"/> holding a <see cref="T:VSlices.Core.Abstracts.Responses.BusinessFailure"/></returns>
+        </member>
+        <member name="M:VSlices.Core.DataAccess.EntityFramework.EFUpdateRepository`3.UpdateAsync(`1,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

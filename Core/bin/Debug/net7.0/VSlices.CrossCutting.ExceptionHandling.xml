@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VSlices.CrossCutting.ExceptionHandling</name>
+    </assembly>
+    <members>
+        <member name="T:VSlices.CrossCutting.ExceptionHandling.ExceptionHandlingBehavior`2">
+            <summary>
+            Base exception handling behavior
+            </summary>
+            <typeparam name="TRequest">The intercepted request to handle</typeparam>
+            <typeparam name="TResponse">The expected successful response</typeparam>
+        </member>
+        <member name="M:VSlices.CrossCutting.ExceptionHandling.ExceptionHandlingBehavior`2.HandleAsync(`0,VSlices.Core.Abstracts.Handlers.RequestHandlerDelegate{`1},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:VSlices.CrossCutting.ExceptionHandling.ExceptionHandlingBehavior`2.ProcessExceptionAsync(System.Exception,`0)">
+            <summary>
+            Processes the exception
+            </summary>
+            <remarks>You can add more specific logging, email sending, etc. here</remarks>
+            <param name="ex">The throw exception</param>
+            <param name="request">The related request information</param>
+            <returns>A <see cref="T:System.Threading.Tasks.ValueTask"/> representing the processing of the exception</returns>
+        </member>
+    </members>
+</doc>
