@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\backend\Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.AspNetCore", "src\backend\Integration.AspNetCore\Integration.AspNetCore.csproj", "{E4C15DA3-3960-44A9-9A3C-38D41B94E5B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CAD1AE00-8609-4B9E-A8A4-38C9EDD38256}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{7107D696-BC2F-4CA0-8249-A3B7EB97B694}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7107D696-BC2F-4CA0-8249-A3B7EB97B694} = {CAD1AE00-8609-4B9E-A8A4-38C9EDD38256}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F8C8B3B-9638-48D6-9106-72DC0651454E}
