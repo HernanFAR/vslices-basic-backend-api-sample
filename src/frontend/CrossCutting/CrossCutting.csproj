@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Connections\QuestionApiConnection.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VSlices.CrossCutting.ExceptionHandling" Version="6.0.0-pre.2" />
+    <PackageReference Include="VSlices.CrossCutting.Logging" Version="6.0.0-pre.2" />
+    <PackageReference Include="VSlices.CrossCutting.Validation.FluentValidation" Version="6.0.0-pre.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="Connections\QuestionApiConnection.json" CodeGenerator="NSwagCSharp" Namespace="CrossCutting.Connections" ClassName="QuestionApiConnection" />
+  </ItemGroup>
+
+</Project>
