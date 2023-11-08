@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{E382D3CD-BF61-40D7-BD1C-303EC84A2256}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\backend\Core\Core.csproj", "{E382D3CD-BF61-40D7-BD1C-303EC84A2256}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCutting", "CrossCutting\CrossCutting.csproj", "{9F0F9706-FC1D-4D49-9ACF-8BF36FE9F622}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCutting", "src\backend\CrossCutting\CrossCutting.csproj", "{9F0F9706-FC1D-4D49-9ACF-8BF36FE9F622}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{C3D4340D-B435-4460-ABED-EBE81107C4E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\backend\Domain\Domain.csproj", "{C3D4340D-B435-4460-ABED-EBE81107C4E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.AspNetCore", "Integration.AspNetCore\Integration.AspNetCore.csproj", "{E4C15DA3-3960-44A9-9A3C-38D41B94E5B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.AspNetCore", "src\backend\Integration.AspNetCore\Integration.AspNetCore.csproj", "{E4C15DA3-3960-44A9-9A3C-38D41B94E5B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
