@@ -1,8 +1,8 @@
 ﻿@page "/fetchdata"
+@using VSlices.Core.Abstracts.Sender
+@using Core.UseCases.GetWeatherForecast
 
-@using Core.Data
-
-@inject WeatherForecastService ForecastService
+@inject ISender Sender
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -40,10 +40,17 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private GetWeatherForecastDto[]? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateOnly.FromDateTime(DateTime.Now));
+        var query = new GetWeatherForecastQuery(DateOnly.FromDateTime(DateTime.Now));
+
+        var response = await Sender.SendAsync(query, default);
+
+        if (response.IsSuccess)
+        {
+            forecasts = response.SuccessValue;
+        }
     }
 }

@@ -1,14 +1,13 @@
-﻿using Core.Data;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Core;
 
-namespace Core;
+// ReSharper disable once CheckNamespace
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class CoreDependencies
 {
     public static IServiceCollection AddCoreDependencies(this IServiceCollection services)
     {
         return services
-            .AddScoped<WeatherForecastService>()
             .AddReflectionSender()
             .AddHandlersFromAssemblyContaining<Anchor>()
             .AddFeatureDependenciesFromAssemblyContaining<Anchor>();

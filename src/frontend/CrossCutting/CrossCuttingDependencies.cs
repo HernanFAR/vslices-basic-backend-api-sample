@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace CrossCutting;
+﻿// ReSharper disable once CheckNamespace
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class CrossCuttingDependencies
 {

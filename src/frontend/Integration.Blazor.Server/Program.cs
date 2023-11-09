@@ -1,13 +1,12 @@
-using Core;
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services
-    .AddCoreDependencies();
+    .AddViewDependencies()
+    .AddCoreDependencies()
+    .AddCrossCuttingDependencies();
 
 var app = builder.Build();
 
