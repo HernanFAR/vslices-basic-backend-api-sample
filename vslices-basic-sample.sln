@@ -17,13 +17,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{7107
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{CA1895C9-0C21-46D8-A494-B5912AF3AF0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\frontend\Core\Core.csproj", "{80EC1685-83CC-4B60-AF74-6EDD6E70717B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\frontend\Core\Core.csproj", "{80EC1685-83CC-4B60-AF74-6EDD6E70717B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Views", "src\frontend\Views\Views.csproj", "{1CC54523-748A-4435-9609-6E9580AFD2A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Views", "src\frontend\Views\Views.csproj", "{1CC54523-748A-4435-9609-6E9580AFD2A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Blazor.Server", "src\frontend\Integration.Blazor.Server\Integration.Blazor.Server.csproj", "{C34F6E7F-C07C-4B4E-8314-EC1A9E8827C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.Blazor.Server", "src\frontend\Integration.Blazor.Server\Integration.Blazor.Server.csproj", "{C34F6E7F-C07C-4B4E-8314-EC1A9E8827C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Blazor.Wasm", "src\frontend\Integration.Blazor.Wasm\Integration.Blazor.Wasm.csproj", "{B5F1B46D-B0A1-4650-B967-4DC7D989A907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.Blazor.Wasm", "src\frontend\Integration.Blazor.Wasm\Integration.Blazor.Wasm.csproj", "{B5F1B46D-B0A1-4650-B967-4DC7D989A907}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCutting", "src\frontend\CrossCutting\CrossCutting.csproj", "{23337376-0E0A-4B73-BB06-BF47E8507D58}"
 EndProject
