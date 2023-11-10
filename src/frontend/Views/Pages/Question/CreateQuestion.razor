@@ -1,0 +1,46 @@
+﻿@page "/question/create"
+
+@using VSlices.Core.Abstracts.Sender
+@using Core.UseCases.CreateQuestion
+
+@inject ISender Sender
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create question</PageTitle>
+
+<h1>Create question</h1>
+
+<EditForm class="w-50" Model="_contract" OnValidSubmit="CreateQuestionAsync">
+    <FluentValidationValidator />
+    <ValidationSummary />
+    
+    <div>
+        <label for="question-title">Title: </label>
+        <div>
+            <InputText id="question-title" class="w-50" @bind-Value="@_contract.Title" />
+        </div>
+    </div>
+
+    <div>
+        <label for="question-content">Content: </label>
+        <div>
+            <InputTextArea id="question-content" class="w-50" @bind-Value="@_contract.Content" />
+        </div>
+    </div>
+    
+    <button type="submit">Create</button>
+</EditForm>
+
+@code {
+    private readonly CreateQuestionRequest _contract = new();
+
+    private async Task CreateQuestionAsync()
+    {
+        var response = await Sender.SendAsync(_contract, default);
+
+        if (response.IsSuccess)
+        {
+            NavigationManager.NavigateTo("/question");
+        }
+    }
+}
